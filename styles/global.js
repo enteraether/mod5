@@ -15,4 +15,14 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  buttonContainer: {
+    backgroundColor: '#222',
+    borderRadius: 5,
+    padding: 10,
+    margin: 20
+  },
+  buttonText: {
+    fontSize: 20,
+    color: '#fff'
+  }
 });

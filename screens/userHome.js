@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { globalStyles } from '../styles/global.js';
 
 export default function userHome() {
@@ -19,10 +19,10 @@ export default function userHome() {
       <View>
        <FlatList
           data={userGoals}
-          renderItem={({ goal })=> (
-            <TouchableOpacity onPress={()=> navigation.navigate('usersIndividualGoal')} >
+          renderItem={({ item })=> (
+            <TouchableOpacity onPress={()=> navigation.navigate('usersIndividualGoal'), item } >
               <Text style={globalStyles.titleText} >
-                {goal.name}
+                {item.name}
               </Text>
             </TouchableOpacity>
           )}

@@ -8,9 +8,14 @@ export default function Home(props) {
     <View style={globalStyles.container}>
       <Text style={globalStyles.titleText}>Goal/Habit Tracking App </Text>
       <TouchableOpacity
-        // style={styles.buttonContainer}
+        style={globalStyles.buttonContainer}
         onPress={() => navigation.navigate('userHome')}>
-        <Text >Go to User Page</Text>
+        <Text style={globalStyles.buttonText}>Login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={globalStyles.buttonContainer}
+        onPress={() => navigation.navigate('userHome')}>
+        <Text style={globalStyles.buttonText}>SignUp</Text>
       </TouchableOpacity>
     </View>
   );
