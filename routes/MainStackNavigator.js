@@ -22,7 +22,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../screens/home';
 import userHome from '../screens/userHome';
-import usersIndividualGoal from '../screens/usersIndividualGoal';
+import usersIndividualGoal from '../components/usersIndividualGoal';
 
 const Stack = createStackNavigator()
 

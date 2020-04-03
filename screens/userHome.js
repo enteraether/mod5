@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { globalStyles } from '../styles/global.js';
+import usersIndividualGoal from '../components/usersIndividualGoal'
 
 export default function userHome() {
 
@@ -11,24 +12,26 @@ export default function userHome() {
   return (
     <View style={globalStyles.container}>
       <View>
-       <Text>User's Home Page</Text>
+       <Text style={globalStyles.titleText} >Welcome Back User</Text>
       </View>
       <View>
        <Text>Progress</Text>
       </View>
-      <View>
+      <View style={globalStyles.goalContainer}>
+      <View style={globalStyles.box} >
        <FlatList
           data={userGoals}
           renderItem={({ item })=> (
             <TouchableOpacity onPress={()=> navigation.navigate('usersIndividualGoal'), item } >
-              <Text style={globalStyles.titleText} >
-                {item.name}
-              </Text>
+              <usersIndividualGoal 
+                item={item}
+              />
             </TouchableOpacity>
           )}
        >
 
        </FlatList>
+      </View>
       </View>
     </View>
   );

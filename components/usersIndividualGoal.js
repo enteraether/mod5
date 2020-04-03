@@ -6,12 +6,10 @@ export default function Home(props) {
     const { navigation } = props
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.titleText}>Goal/Habit Tracking App </Text>
-      <TouchableOpacity
-        // style={styles.buttonContainer}
-        onPress={() => navigation.navigate('userHome')}>
-        <Text >Go to User Page</Text>
-      </TouchableOpacity>
+      <Text style={globalStyles.titleText}>User's Individ Goal </Text>
+      <Text style={globalStyles.titleText} >
+                {item.name}
+              </Text>
     </View>
   );
 }

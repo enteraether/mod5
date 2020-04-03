@@ -24,5 +24,27 @@ export const globalStyles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: '#fff'
-  }
+  },
+  box: {
+    height: 200,
+    width: 300,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  goalContainer: {
+    // flex: 1,
+    // backgroundColor: "#e2e2e2",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+ 
 });
