@@ -28,7 +28,7 @@ export const globalStyles = StyleSheet.create({
   box: {
     height: 200,
     width: 300,
-    backgroundColor: "#fff",
+    backgroundColor: "#9e8d9f",
     alignItems: "center",
     justifyContent: "center",
     shadowColor: "#000",
@@ -46,5 +46,12 @@ export const globalStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  item: {
+    backgroundColor: '#D3D3D3',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    color: "#FFFFFF"
+  }
  
 });
