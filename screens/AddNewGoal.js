@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { globalStyles } from '../styles/global.js';
+import ModalDatePicker from 'react-native-datepicker-modal'
 import {   
   Formik,
   Field,
@@ -18,21 +19,11 @@ import {
   MenuItem
 } from "@material-ui/core";
 
-create_table "goals", force: :cascade do |t|
-t.integer "likes"
-t.boolean "private"
-t.string "what"
-t.string "why"
-t.string "name"
-t.datetime "start_date"
-t.bigint "user_id", null: false
-t.datetime "created_at", precision: 6, null: false
-t.datetime "updated_at", precision: 6, null: false
-t.index ["user_id"], name: "index_goals_on_user_id"
-end
 
 export default function AddNewGoal(props) {
     // const { navigation } = props
+
+
   return (
     <View style={globalStyles.container}>
     <Formik
@@ -45,6 +36,7 @@ export default function AddNewGoal(props) {
         {props => (
   
           <View>
+
             <Text >Goal Name</Text>
             <TextInput
               style={globalStyles.formInput}
