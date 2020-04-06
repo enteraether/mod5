@@ -57,6 +57,13 @@ export const globalStyles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     color: "#FFFFFF"
-  }
+  },
+  formInput: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    padding: 10,
+    fontSize: 18,
+    borderRadius: 6,
+  },
  
 });
