@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { globalStyles } from '../styles/global.js';
-import UsersIndividualGoal from './UsersIndividualGoal'
+import PrivateGoalCard from '../container/PrivateGoalCard'
 
 export default function userHome({navigation}) {
 
-  const [userGoals, setUserGoals] = useState([
-    { id: 1, private: true, why: 'bc i want to', what: 'read 15 mins/day', name: 'Reading Goal', date: '4/1/2019' },
-    { id: 2, private: true, why: 'bc i want to', what: 'study french 15 mins/day', name: 'Language Goal', date: '3/1/2019' }
-  ])
+  const [userGoals, setUserGoals] = useState()
 
-  console.log(navigation)
+  useEffect(() => {
+    fetch("http://localhost:3000/goals").then(resp => resp.json()).then(data => setUserGoals(data))
+  }, []
+  )
+
+  // console.log(Application.applicationId)
 
   return (
-    <View style={globalStyles.container}>
+    <View style={globalStyles.containerUserHome}>
+
       <View>
        <Text style={globalStyles.titleText} >Welcome Back User</Text>
       </View>
@@ -21,21 +25,22 @@ export default function userHome({navigation}) {
        <Text>Progress</Text>
       </View>
       <View style={globalStyles.goalContainer}>
-
+      {/* {userGoals.map(goal => <PrivateGoalCard goal={goal} key={goal.id} navigation={navigation} />)} */}
+      {/* <ScrollView> */}
        <FlatList
           data={userGoals}
           renderItem={({ item })=> (
             <TouchableOpacity onPress={()=> navigation.navigate('UsersIndividualGoal', {item})} style={[globalStyles.item]}>
               <View style={globalStyles.box} >
-              <Text style={globalStyles.titleText} >
-                {item.name}
-              </Text>
+                <Text style={globalStyles.titleText} >
+                  {item.name}
+                </Text>
               </View>
             </TouchableOpacity>
           )}
        >
-
        </FlatList>
+       {/* </ScrollView> */}
       </View>
 
       <View style={globalStyles.buttonContainer} >

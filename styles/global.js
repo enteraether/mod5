@@ -15,6 +15,11 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  containerUserHome: {
+    flex: 1,
+    padding: 20,
+    paddingBottom: 300,
+  },
   buttonContainer: {
     backgroundColor: '#222',
     borderRadius: 5,

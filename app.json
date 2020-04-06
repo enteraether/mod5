@@ -22,7 +22,16 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "mod5",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.346606695131-293p5g5dmq27ouv8v4ec4upq6prrn80m"
+        }
+      },
       "supportsTablet": true
     }
+    // "android": {
+    //   "package": "mod5"
+    // }
   }
 }
