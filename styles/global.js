@@ -7,6 +7,12 @@ export const globalStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
   },
+  formHeaderText: {
+    fontSize: 18,
+    color: '#333',
+    padding: 5,
+    paddingTop: 20,
+  },
   paragraph: {
     marginVertical: 8,
     lineHeight: 20,

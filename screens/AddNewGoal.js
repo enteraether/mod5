@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { globalStyles } from '../styles/global.js';
-import ModalDatePicker from 'react-native-datepicker-modal'
-import {   
+import DateTimePicker from '@react-native-community/datetimepicker';import {   
   Formik,
   Field,
   Form,
@@ -22,7 +21,7 @@ import {
 
 export default function AddNewGoal(props) {
     // const { navigation } = props
-
+    const [date, setDate] = useState(new Date(1598051730000))
 
   return (
     <View style={globalStyles.container}>
@@ -36,15 +35,17 @@ export default function AddNewGoal(props) {
         {props => (
   
           <View>
-
-            <Text >Goal Name</Text>
+            <View style={globalStyles.titleText} >
+            <Text style={globalStyles.titleText}>Woohoooo let's set a new goal!!!</Text>
+            </View>
+            <Text style={globalStyles.formHeaderText}>Goal Name</Text>
             <TextInput
               style={globalStyles.formInput}
-              placeholder='name'
+              placeholder='Goal Name'
               onChangeText={props.handleChange('name')}
               value={props.values.name}
             />
-            <Text >What daily task will you do to reach your goal?</Text>
+            <Text style={globalStyles.formHeaderText}>What daily task will you do to reach your goal?</Text>
             <TextInput
               style={globalStyles.formInput}
               multiline
@@ -52,16 +53,19 @@ export default function AddNewGoal(props) {
               onChangeText={props.handleChange('what')}
               value={props.values.what}
             />
-            <Text >Why do you want to accomplish this goal? How will it make you better? How will you see yourself differently once you accomplish this goal?</Text>
+            <Text style={globalStyles.formHeaderText}>Why do you want to accomplish this goal? How will it make you better? How will you see yourself differently once you accomplish this goal?</Text>
             <TextInput 
               style={globalStyles.formInput}
-              placeholder='Why'
+              placeholder='Why do you want to accomplish this goal?'
               onChangeText={props.handleChange('why')}
               value={props.values.why}
               // keyboardType='numeric'
             />
-            
-            <Button color='maroon' title="Submit" onPress={props.handleSubmit} /> 
+            <Text style={globalStyles.formHeaderText}>Start Date:</Text>
+            <DateTimePicker value={date} />
+            <View style={globalStyles.buttonContainer} >
+            <Button  color='white' title="Submit" onPress={props.handleSubmit} /> 
+            </View>
           </View>
         )}
       </Formik>

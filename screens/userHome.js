@@ -25,8 +25,6 @@ export default function userHome({navigation}) {
        <Text>Progress</Text>
       </View>
       <View style={globalStyles.goalContainer}>
-      {/* {userGoals.map(goal => <PrivateGoalCard goal={goal} key={goal.id} navigation={navigation} />)} */}
-      {/* <ScrollView> */}
        <FlatList
           data={userGoals}
           renderItem={({ item })=> (
