@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, TextInput, Button, TouchableWithoutFeedback, Keyboard, CheckBox, StyleSheet } from 'react-native';
 import { globalStyles } from '../styles/global.js';
 import DateTimePicker from '@react-native-community/datetimepicker';import {   
   Formik,
@@ -17,38 +17,54 @@ import {
   Select,
   MenuItem
 } from "@material-ui/core";
+import { Ionicons } from '@expo/vector-icons'
 
 
 export default function AddNewGoal(props) {
-    // const [date, setDate] = useState(new Date())
-    const [goals, setGoals] = useState()
 
-    // const onChange = (event, selectedDate) => {
-    //   const currentDate = selectedDate || date;
-    //   // setShow(Platform.OS === 'ios');
-    //   setDate(currentDate);
-    // };
-
+    // const [goals, setGoals] = useState()
 
 
   return (
     <View style={globalStyles.container}>
 
     <Formik
-        initialValues={{private: '', what: '', why: '', name: '', start_date: new Date() }}
-        onSubmit={(values, actions) => {
+        initialValues={{private: false , what: '', why: '', name: '', start_date: new Date() }}
+        onSubmit={(goal, actions) => {
+          
+          fetch("http://localhost:3000/goals", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            }, body: JSON.stringify({goal})
+          }).then(resp => resp.json())
+          .then(console.log)
           actions.resetForm(); 
-          addNewGoal(values);
+          // addNewGoal(values);
         }}
     >
         {props => (
   
           <View>
             <View style={globalStyles.center}>
-            <Text style={globalStyles.formHeaderTitle} >Woohoooo let's set a new goal!!!</Text>
+              <Text style={globalStyles.formHeaderTitle} >Woohoooo let's set a new goal!!!</Text>
             </View>
-            <Text style={globalStyles.formHeaderText}>Goal Name</Text>
-            <TextInput
+            <View >
+               <Text style={globalStyles.formHeaderText} >Make this goal Public? </Text>
+               <CheckBox
+                  containerStyle={styles.checkBoxContainer}
+                  checkedIcon='check-box'
+                  iconType='material'
+                  uncheckedIcon='check-box-outline-blank'
+                  title='Agree to terms and conditions'
+                  checkedTitle='You agreed to our terms and conditions'
+                  checked={props.values.private}
+                  onPress={() => setFieldValue('check', !props.values.check)}
+                />
+            </View>
+              <Text style={globalStyles.formHeaderText}>Goal Name</Text>
+              <TextInput
               style={globalStyles.formInput}
               placeholder='Goal Name'
               onChangeText={props.handleChange('name')}
@@ -85,3 +101,10 @@ export default function AddNewGoal(props) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  checkBoxContainer: {
+    backgroundColor: '#fff',
+    borderColor: '#fff'
+  }
+})

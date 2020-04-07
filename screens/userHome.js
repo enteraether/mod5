@@ -8,19 +8,18 @@ export default function userHome({navigation}) {
 
   const [userGoals, setUserGoals] = useState()
 
-  const addNewGoal = (goal) => {
-    // goals.key = Math.random().toString();
-    setReviews((currentGoals) => {
-      return [goal, ...currentGoals];
-    });
-  };
+  // const addNewGoal = (goal) => {
+  //   // goals.key = Math.random().toString();
+  //   setGoals((currentGoals) => {
+  //     return [goal, ...currentGoals];
+  //   });
+  // };
 
   useEffect(() => {
     fetch("http://localhost:3000/goals").then(resp => resp.json()).then(data => setUserGoals(data))
   }, []
   )
 
-  // console.log(Application.applicationId)
 
   return (
     <View style={globalStyles.containerUserHome}>
@@ -49,7 +48,7 @@ export default function userHome({navigation}) {
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
       <View style={globalStyles.buttonContainer} >
-         <TouchableOpacity onPress={()=> navigation.navigate('AddNewGoal')} >
+         <TouchableOpacity onPress={()=> navigation.navigate('AddNewGoal') } >
               <Text style={globalStyles.buttonText} >
                 Add New Goal
               </Text>
