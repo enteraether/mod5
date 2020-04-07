@@ -13,6 +13,15 @@ export const globalStyles = StyleSheet.create({
     padding: 5,
     paddingTop: 20,
   },
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  formHeaderTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
   paragraph: {
     marginVertical: 8,
     lineHeight: 20,

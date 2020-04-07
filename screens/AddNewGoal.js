@@ -35,8 +35,8 @@ export default function AddNewGoal(props) {
         {props => (
   
           <View>
-            <View style={globalStyles.titleText} >
-            <Text style={globalStyles.titleText}>Woohoooo let's set a new goal!!!</Text>
+            <View style={globalStyles.center}>
+            <Text style={globalStyles.formHeaderTitle} >Woohoooo let's set a new goal!!!</Text>
             </View>
             <Text style={globalStyles.formHeaderText}>Goal Name</Text>
             <TextInput
