@@ -8,6 +8,13 @@ export default function userHome({navigation}) {
 
   const [userGoals, setUserGoals] = useState()
 
+  const addNewGoal = (goal) => {
+    // goals.key = Math.random().toString();
+    setReviews((currentGoals) => {
+      return [goal, ...currentGoals];
+    });
+  };
+
   useEffect(() => {
     fetch("http://localhost:3000/goals").then(resp => resp.json()).then(data => setUserGoals(data))
   }, []

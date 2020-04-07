@@ -20,27 +20,22 @@ import {
 
 
 export default function AddNewGoal(props) {
-    const [date, setDate] = useState(new Date(1598051730000))
+    // const [date, setDate] = useState(new Date())
     const [goals, setGoals] = useState()
 
-    const onChange = (event, selectedDate) => {
-      const currentDate = selectedDate || date;
-      // setShow(Platform.OS === 'ios');
-      setDate(currentDate);
-    };
+    // const onChange = (event, selectedDate) => {
+    //   const currentDate = selectedDate || date;
+    //   // setShow(Platform.OS === 'ios');
+    //   setDate(currentDate);
+    // };
 
-    const addNewGoal = (goal) => {
-      // goals.key = Math.random().toString();
-      setReviews((currentGoals) => {
-        return [goal, ...currentGoals];
-      });
-    };
+
 
   return (
     <View style={globalStyles.container}>
 
     <Formik
-        initialValues={{private: '', what: '', why: '', name: '', start_date: '' }}
+        initialValues={{private: '', what: '', why: '', name: '', start_date: new Date() }}
         onSubmit={(values, actions) => {
           actions.resetForm(); 
           addNewGoal(values);
@@ -77,8 +72,8 @@ export default function AddNewGoal(props) {
             />
             <Text style={globalStyles.formHeaderText}>Start Date:</Text>
             <DateTimePicker 
-                value={date} 
-                onChange={onChange}
+                value={props.values.start_date} 
+                onChange={props.handleChange('start_date')}
             />
             <View style={globalStyles.buttonContainer} >
             <Button  color='white' title="Submit" onPress={props.handleSubmit} /> 

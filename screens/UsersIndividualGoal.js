@@ -42,7 +42,7 @@ export default function UsersIndividualGoal(props) {
           </View>
 
           <Formik
-              initialValues={{notes: '', completed: ''}}
+              initialValues={{notes: '', completed: false}}
               onSubmit={(values, actions) => {
                 actions.resetForm(); 
                 // addReview(values);
