@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { globalStyles } from '../styles/global.js';
 import DateTimePicker from '@react-native-community/datetimepicker';import {   
   Formik,
@@ -20,16 +20,30 @@ import {
 
 
 export default function AddNewGoal(props) {
-    // const { navigation } = props
     const [date, setDate] = useState(new Date(1598051730000))
+    const [goals, setGoals] = useState()
+
+    const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      // setShow(Platform.OS === 'ios');
+      setDate(currentDate);
+    };
+
+    const addNewGoal = (goal) => {
+      // goals.key = Math.random().toString();
+      setReviews((currentGoals) => {
+        return [goal, ...currentGoals];
+      });
+    };
 
   return (
     <View style={globalStyles.container}>
+
     <Formik
         initialValues={{private: '', what: '', why: '', name: '', start_date: '' }}
         onSubmit={(values, actions) => {
           actions.resetForm(); 
-          // addReview(values);
+          addNewGoal(values);
         }}
     >
         {props => (
@@ -62,13 +76,17 @@ export default function AddNewGoal(props) {
               // keyboardType='numeric'
             />
             <Text style={globalStyles.formHeaderText}>Start Date:</Text>
-            <DateTimePicker value={date} />
+            <DateTimePicker 
+                value={date} 
+                onChange={onChange}
+            />
             <View style={globalStyles.buttonContainer} >
             <Button  color='white' title="Submit" onPress={props.handleSubmit} /> 
             </View>
           </View>
         )}
       </Formik>
+
     </View>
   );
 }

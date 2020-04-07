@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { globalStyles } from '../styles/global.js';
 import PrivateGoalCard from '../container/PrivateGoalCard'
 
@@ -17,13 +17,13 @@ export default function userHome({navigation}) {
 
   return (
     <View style={globalStyles.containerUserHome}>
-
       <View>
        <Text style={globalStyles.titleText} >Welcome Back User</Text>
       </View>
       <View>
        <Text>Progress</Text>
       </View>
+
       <View style={globalStyles.goalContainer}>
        <FlatList
           data={userGoals}
@@ -37,18 +37,18 @@ export default function userHome({navigation}) {
             </TouchableOpacity>
           )}
        >
-       </FlatList>
-       {/* </ScrollView> */}
+       </FlatList>    
       </View>
 
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
       <View style={globalStyles.buttonContainer} >
          <TouchableOpacity onPress={()=> navigation.navigate('AddNewGoal')} >
               <Text style={globalStyles.buttonText} >
                 Add New Goal
               </Text>
- 
           </TouchableOpacity>
       </View>
+      </TouchableWithoutFeedback>
 
       <View style={globalStyles.buttonContainer} >
          <TouchableOpacity onPress={()=> navigation.navigate('CommunitiesPublicGoals')} >
@@ -58,7 +58,7 @@ export default function userHome({navigation}) {
  
           </TouchableOpacity>
       </View>
-
+     
     </View>
   );
 }
