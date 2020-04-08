@@ -2,17 +2,32 @@ import React, {useState} from 'react';
 import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { Button } from 'react-native-elements'
 import { globalStyles } from '../styles/global.js';
-import { Formik } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
 
 export default function Home(props) {
     const { navigation } = props
     // goToLogin = () => this.props.navigation.navigate('userHome')
     // const [user, setUser] = useState()
-  return (
-    <View style={styles.container}>
 
-<Formik
+    const reviewSchema = yup.object({
+      name: yup.string()
+        .required()
+        .min(2),
+      username: yup.string()
+        .required()
+        .min(3),
+      password: yup.string()
+        .required()
+        .min(3),
+    });
+
+  return (
+    <View style={globalStyles.homeContainer}>
+
+    <Formik
         initialValues={{name: '', username: '', password: ''}}
+        validationSchema={reviewSchema}
         onSubmit={(user, actions) => {
           
           fetch("http://localhost:3000/users", {
@@ -45,17 +60,21 @@ export default function Home(props) {
                 onChangeText={props.handleChange('name')}
                 placeholder='Enter your full name'
                 style={globalStyles.formInput}
+                onBlur={props.handleBlur('name')} 
               />
+              <Text style={globalStyles.errorText}>{props.touched.name && props.errors.name}</Text>
               </View>
 
               <View style={globalStyles.loginPadding} >
               <TextInput
                 name='username'
-                value={props.values.email}
-                onChangeText={props.handleChange('email')}
-                placeholder='Enter email'
+                value={props.values.username}
+                onChangeText={props.handleChange('username')}
+                placeholder='Enter username'
                 style={globalStyles.formInput}
+                onBlur={props.handleBlur('username')}
               />
+              <Text style={globalStyles.errorText}>{props.touched.username && props.errors.username}</Text>
               </View>
 
               <View style={globalStyles.loginPadding} >
@@ -65,7 +84,9 @@ export default function Home(props) {
                 onChangeText={props.handleChange('password')}
                 placeholder='Enter password'
                 style={globalStyles.formInput}
+                onBlur={props.handleBlur('password')} 
               />
+              <Text style={globalStyles.errorText}>{props.touched.password && props.errors.password}</Text>
               </View>
 
               <View >
@@ -94,24 +115,3 @@ export default function Home(props) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    marginTop: 50
-  },
-  logoContainer: {
-    marginBottom: 15,
-    alignItems: 'center'
-  },
-  buttonContainer: {
-    margin: 25
-  },
-  checkBoxContainer: {
-    backgroundColor: '#fff',
-    borderColor: '#fff'
-  },
-  inputContainer: {
-    margin: 15
-  },
-})

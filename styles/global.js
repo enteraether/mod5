@@ -83,5 +83,18 @@ export const globalStyles = StyleSheet.create({
   loginPadding: {
     padding: 10,
   },
+  errorText: {
+    color: 'crimson',
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: 'center',
+  },
+  homeContainer: {
+    flex: 1,
+    // backgroundColor: '#fff',
+    marginTop: 10
+  },
  
 });
+

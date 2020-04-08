@@ -29,7 +29,7 @@ export default function AddNewGoal(props) {
     <View style={globalStyles.container}>
 
     <Formik
-        initialValues={{private: false , what: '', why: '', name: '', start_date: new Date() }}
+        initialValues={{private: false , what: '', why: '', name: '', start_date: new Date()}}
         onSubmit={(goal, actions) => {
           
           fetch("http://localhost:3000/goals", {

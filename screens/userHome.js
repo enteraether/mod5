@@ -23,11 +23,11 @@ export default function userHome({navigation}) {
 
   return (
     <View style={globalStyles.containerUserHome}>
-      <View>
-       <Text style={globalStyles.titleText} >Welcome Back User</Text>
+      <View style={globalStyles.center} >
+       <Text style={globalStyles.titleText} >Welcome Back, Theresa</Text>
       </View>
-      <View>
-       <Text>Progress</Text>
+      <View style={globalStyles.center} >
+       <Text></Text>
       </View>
 
       <View style={globalStyles.goalContainer}>

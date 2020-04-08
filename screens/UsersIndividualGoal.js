@@ -20,7 +20,7 @@ import {
 
 export default function UsersIndividualGoal(props) {
     
-    // console.log(props.route.params)
+    console.log(props.route.params.item)
 
     const [note, setNote] = useState()
 
@@ -32,20 +32,24 @@ export default function UsersIndividualGoal(props) {
             <Text style={globalStyles.titleText}>{props.route.params.item.name}</Text>
           </View>
 
-          <Text style={globalStyles.titleText}>{props.route.params.item.name} Consecutive Days Practicing Goal </Text>
+          <Text style={globalStyles.formHeaderText}>15 Consecutive Days Practicing Goal </Text>
 
-          <Text style={globalStyles.titleText}>____ Total Days Practicing Goal </Text>
-
-          <View>
-            <Text style={globalStyles.titleText}>Log Today's Progress </Text>
-            <Text style={globalStyles.titleText}>____ Total Days Practicing Goal </Text>
-          </View>
+          <Text style={globalStyles.formHeaderText}>25 Total Days Practicing Goal </Text>
 
           <Formik
               initialValues={{notes: '', completed: false}}
-              onSubmit={(values, actions) => {
+              onSubmit={(goal, actions) => {
+          
+                fetch("http://localhost:3000/goals", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                  }, body: JSON.stringify({goal})
+                }).then(resp => resp.json())
+                .then(console.log)
                 actions.resetForm(); 
-                // addReview(values);
+                // addNewGoal(values);
               }}
               >
               {props => (
@@ -72,6 +76,14 @@ export default function UsersIndividualGoal(props) {
                     </View>
           )} 
           </Formik>
+
+          <View>
+            <View style={globalStyles.center}>
+             <Text style={globalStyles.titleText}>Comments</Text>
+            </View>
+
+            <Text style={globalStyles.formHeaderText}> > Yo! I also love space! If you ever wanna talk black holes or gravitational waves, hit me up! </Text>
+          </View>
 
         </View>
 
