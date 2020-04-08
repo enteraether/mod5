@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, TouchableWithoutFeedback, Keyboard, CheckBox, StyleSheet } from 'react-native';
+import { ImageBackground, View, Text, TextInput, Button, TouchableWithoutFeedback, Keyboard, CheckBox, StyleSheet } from 'react-native';
 import { globalStyles } from '../styles/global.js';
 import DateTimePicker from '@react-native-community/datetimepicker';import {   
   Formik,
@@ -26,6 +26,10 @@ export default function AddNewGoal(props) {
 
 
   return (
+    <ImageBackground
+    source={require('../assets/images/white-texture.jpg')}
+    style={globalStyles.homeContainer}
+    >
     <View style={globalStyles.container}>
 
     <Formik
@@ -99,6 +103,7 @@ export default function AddNewGoal(props) {
       </Formik>
 
     </View>
+    </ImageBackground>
   );
 }
 

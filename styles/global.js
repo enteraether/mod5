@@ -7,6 +7,11 @@ export const globalStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
   },
+  goalTitleText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#eee',
+  },
   homePageHeader: {
     color: '#333',
     fontSize: 28,
@@ -50,25 +55,24 @@ export const globalStyles = StyleSheet.create({
   containerUserHome: {
     flex: 1,
     padding: 20,
-    paddingBottom: 300,
+    paddingBottom: 230,
   },
   buttonContainer: {
     backgroundColor: '#222',
     borderRadius: 5,
     padding: 10,
-    margin: 20,
+    margin: 15,
     alignItems: "center",
     justifyContent: "center",
   },
   buttonText: {
     fontSize: 20,
     color: '#fff',
-
   },
   box: {
     height: 200,
     width: 300,
-    backgroundColor: "#9e8d9f",
+    // backgroundColor: "#9e8d9f",
     alignItems: "center",
     justifyContent: "center",
     shadowColor: "#000",
@@ -87,8 +91,8 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "center",
   },
   item: {
-    backgroundColor: '#D3D3D3',
-    padding: 20,
+    // backgroundColor: '#D3D3D3',
+    padding: 7,
     marginVertical: 8,
     marginHorizontal: 16,
     color: "#FFFFFF"
@@ -117,7 +121,7 @@ export const globalStyles = StyleSheet.create({
   },
   goalItem: {
     width: '50%',
-    height: '50%',
+    height: '30%',
     padding: 35,
     borderColor: '#000',
     borderWidth: 3

@@ -38,11 +38,14 @@ export default function userHome({navigation}) {
               <View style={globalStyles.box} >
                 <ImageBackground
                 source={require('../assets/images/watercolor.jpg')}
-                style={globalStyles.homeContainer}>
-
-                <Text style={globalStyles.titleText} >
+                style={{    
+                  height: 200,
+                  width: 300,}}>
+                <View style={globalStyles.center} >
+                  <Text style={globalStyles.goalTitleText} >
                   {item.name}
                 </Text>
+                </View>
                 </ImageBackground>
               </View>
             </TouchableOpacity>
