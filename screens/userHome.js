@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { ImageBackground, View, Text, FlatList, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { globalStyles } from '../styles/global.js';
 import PrivateGoalCard from '../container/PrivateGoalCard'
 
@@ -34,11 +34,16 @@ export default function userHome({navigation}) {
        <FlatList
           data={userGoals}
           renderItem={({ item })=> (
-            <TouchableOpacity onPress={()=> navigation.navigate('UsersIndividualGoal', {item})} style={[globalStyles.item]}>
+            <TouchableOpacity onPress={()=> navigation.navigate('UsersIndividualGoal', {item})} style={globalStyles.item}>
               <View style={globalStyles.box} >
+                <ImageBackground
+                source={require('../assets/images/watercolor.jpg')}
+                style={globalStyles.homeContainer}>
+
                 <Text style={globalStyles.titleText} >
                   {item.name}
                 </Text>
+                </ImageBackground>
               </View>
             </TouchableOpacity>
           )}

@@ -7,6 +7,23 @@ export const globalStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
   },
+  homePageHeader: {
+    color: '#333',
+    fontSize: 28,
+    borderColor: '#333',
+    borderWidth: 2,
+    padding: 20,
+    paddingLeft: 40,
+    paddingRight: 40,
+    backgroundColor: 'rgba(255,255,255, .1)'
+  },
+  topOfPagePadding: {
+    paddingTop: 80,
+  },
+  spaceBtElements: {
+    paddingTop: 30,
+  },
+
   formHeaderText: {
     fontSize: 18,
     color: '#333',
@@ -39,11 +56,14 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: '#222',
     borderRadius: 5,
     padding: 10,
-    margin: 20
+    margin: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
     fontSize: 20,
-    color: '#fff'
+    color: '#fff',
+
   },
   box: {
     height: 200,
@@ -93,7 +113,21 @@ export const globalStyles = StyleSheet.create({
   homeContainer: {
     flex: 1,
     // backgroundColor: '#fff',
-    marginTop: 10
+    // marginTop: 10
+  },
+  goalItem: {
+    width: '50%',
+    height: '50%',
+    padding: 35,
+    borderColor: '#000',
+    borderWidth: 3
+  },
+  goal: {
+    width: '100%',
+    height: '100%',
+    opacity: 0.8,
+    borderColor: '#000',
+    borderWidth: 3
   },
  
 });

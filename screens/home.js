@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, TextInput, ImageBackground } from 'react-native';
 import { Button } from 'react-native-elements'
 import { globalStyles } from '../styles/global.js';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -23,7 +23,13 @@ export default function Home(props) {
     });
 
   return (
-    <View style={globalStyles.homeContainer}>
+    <ImageBackground
+      source={require('../assets/images/white-texture.jpg')}
+      style={globalStyles.homeContainer}
+      >
+    
+    
+    <View >
 
     <Formik
         initialValues={{name: '', username: '', password: ''}}
@@ -50,8 +56,15 @@ export default function Home(props) {
     >
         {props => (
   
-          <View style={globalStyles.container} >
-            <Text style={globalStyles.titleText}>The Goal Tracking App </Text>
+          <View  >
+
+            <View style={globalStyles.center}>
+              <View style={globalStyles.topOfPagePadding}>
+              <Text style={globalStyles.homePageHeader}>The Goal Tracking App </Text>
+              </View>
+            </View>
+
+            <View style={globalStyles.spaceBtElements}></View>
             
             <View style={globalStyles.loginPadding} >
             <TextInput
@@ -96,6 +109,7 @@ export default function Home(props) {
                     onPress={() => navigation.navigate('userHome')}>
                   <Text style={globalStyles.buttonText}>Login</Text>
                   </TouchableOpacity>
+
                   <TouchableOpacity
                     style={globalStyles.buttonContainer}
                     onPress={() => navigation.navigate('UsersIndividualGoal')}>
@@ -104,14 +118,15 @@ export default function Home(props) {
               </View>
 
 
-            <View style={globalStyles.buttonContainer} >
+            {/* <View style={globalStyles.buttonContainer} >
               <Button  color='white' title="Submit" onPress={props.handleSubmit} /> 
-            </View>
+            </View> */}
           </View>
         )}
       </Formik>
-
     </View>
+    </ImageBackground>
+    
   );
 }
 
