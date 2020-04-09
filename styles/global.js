@@ -99,9 +99,11 @@ export const globalStyles = StyleSheet.create({
   },
   formInput: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#333',
     padding: 10,
     fontSize: 18,
+    marginLeft: 18,
+    marginRight: 18,
     borderRadius: 6,
   },
   loginPadding: {

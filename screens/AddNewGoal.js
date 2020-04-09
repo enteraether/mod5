@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ImageBackground, View, Text, TextInput, Button, TouchableWithoutFeedback, Keyboard, CheckBox, StyleSheet } from 'react-native';
+import { ImageBackground, View, Text, TextInput, Button, TouchableWithoutFeedback, Keyboard,  StyleSheet } from 'react-native';
+import { CheckBox } from 'react-native-elements'
 import { globalStyles } from '../styles/global.js';
-import DateTimePicker from '@react-native-community/datetimepicker';import {   
+import DateTimePicker from '@react-native-community/datetimepicker';
+import * as yup from 'yup';
+import {   
   Formik,
   Field,
   Form,
@@ -9,20 +12,25 @@ import DateTimePicker from '@react-native-community/datetimepicker';import {
   FieldAttributes,
   FieldArray} 
 from 'formik';
-import {
-  TextField,
-  Checkbox,
-  Radio,
-  FormControlLabel,
-  Select,
-  MenuItem
-} from "@material-ui/core";
 import { Ionicons } from '@expo/vector-icons'
 
 
 export default function AddNewGoal(props) {
 
     // const [goals, setGoals] = useState()
+
+    ////// fix this review schema
+    const reviewSchema = yup.object({
+      name: yup.string()
+        .required()
+        .min(2),
+      username: yup.string()
+        .required()
+        .min(3),
+      password: yup.string()
+        .required()
+        .min(3),
+    });
 
 
   return (
@@ -33,7 +41,9 @@ export default function AddNewGoal(props) {
     <View style={globalStyles.container}>
 
     <Formik
-        initialValues={{private: false , what: '', why: '', name: '', start_date: new Date()}}
+        initialValues={{private: false , what: '', why: '', name: '', start_date: new Date(), user_id: 1}}
+        //// fix this validation schema
+        validationSchema={reviewSchema}
         onSubmit={(goal, actions) => {
           
           fetch("http://localhost:3000/goals", {
@@ -45,6 +55,7 @@ export default function AddNewGoal(props) {
           }).then(resp => resp.json())
           .then(console.log)
           actions.resetForm(); 
+          // goToLogin = () => navigation.navigate('userHome')
           // addNewGoal(values);
         }}
     >
@@ -55,16 +66,20 @@ export default function AddNewGoal(props) {
               <Text style={globalStyles.formHeaderTitle} >Woohoooo let's set a new goal!!!</Text>
             </View>
             <View >
-               <Text style={globalStyles.formHeaderText} >Make this goal Public? </Text>
+               <Text style={globalStyles.formHeaderText} >Make this goal Public? 
+               
+               </Text>
+               {/* <Ionicons name="md-checkbox" size={32} color="green" /> */}
+
                <CheckBox
-                  containerStyle={styles.checkBoxContainer}
+                  // containerStyle={styles.checkBoxContainer}
                   checkedIcon='check-box'
                   iconType='material'
                   uncheckedIcon='check-box-outline-blank'
-                  title='Agree to terms and conditions'
+                  // title='Agree to terms and conditions'
                   checkedTitle='You agreed to our terms and conditions'
                   checked={props.values.private}
-                  onPress={() => setFieldValue('check', !props.values.check)}
+                  onPress={() => props.setFieldValue('private', !props.values.private)}
                 />
             </View>
               <Text style={globalStyles.formHeaderText}>Goal Name</Text>
