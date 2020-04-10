@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button,TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity, Button,TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { globalStyles } from '../styles/global.js';
 import { CheckBox } from 'react-native-elements'
 import * as yup from 'yup';
@@ -9,9 +9,18 @@ from 'formik';
 
 export default function UsersIndividualGoal(props) {
     
-    console.log(props.route.params.item)
+const comments = () => {
+  return props.route.params.item.comments.map(comment=>{
+    return <Text>{comment['comment']}</Text>
 
-    const [note, setNote] = useState()
+  })
+} 
+
+    // console.log(
+    //   comments()
+    // )
+
+    // const [note, setNote] = useState()
 
     let first = props.route.params.item.start_date
     console.log(first)
@@ -22,45 +31,50 @@ export default function UsersIndividualGoal(props) {
   // }
 
       ////// fix this review schema
-      const reviewSchema = yup.object({
-        name: yup.string()
-          .required()
-          .min(2),
-        username: yup.string()
-          .required()
-          .min(3),
-        password: yup.string()
-          .required()
-          .min(3),
+      // add note inside
+      const goalCountReviewSchema = yup.object({
+        counter: yup.boolean().oneOf([true], 'Please check the agreement')
+      });
+
+      const noteReviewSchema = yup.object({
+        note: yup.string()
+          .required('Gotta have a note to hit submit')
       });
     
   return (
+    <ImageBackground
+    source={require('../assets/images/white-texture.jpg')}
+    style={globalStyles.homeContainer}
+    >
         <View >
 
           <View style={globalStyles.center} >
             <Text style={globalStyles.titleText}>{props.route.params.item.name}</Text>
           </View>
 
-          <Text style={globalStyles.formHeaderText}> ____ Consecutive Days Practicing Goal </Text>
+          {/* <Text style={globalStyles.formHeaderText}> ____ Consecutive Days Practicing Goal </Text> */}
 
-          <Text style={globalStyles.formHeaderText}> ____ Total Days Practicing Goal </Text>
+          <Text style={globalStyles.formHeaderText}> {props.route.params.item.counter}: Total Days Practicing Goal </Text>
 
 
 
           <Formik
-              initialValues={{count: 1, goal_id: 1 }}
+              initialValues={{counter: false }}
               //// fix this validation schema
-              validationSchema={reviewSchema}
-              onSubmit={(count, actions) => {
-          
-                fetch("http://localhost:3000/goals", {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                  }, body: JSON.stringify({count})
-                }).then(resp => resp.json())
-                .then(console.log)
+              validationSchema={ goalCountReviewSchema }
+              onSubmit={(values, actions) => {
+                if (values['counter'])
+                  {fetch("http://localhost:3000/goals/1", {
+                    method: "PATCH",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Accept": "application/json"
+                    }, body: JSON.stringify({values})
+                  }).then(resp => resp.json())}
+          else {
+                // make alert here 
+          }
+                // .then(console.log)
 
                 // add validation so they can't submit this form more than once per day
 
@@ -91,6 +105,11 @@ export default function UsersIndividualGoal(props) {
                           onPress={() => props.setFieldValue('counter', !props.values.counter)}
                       />
 
+                    <Text style={globalStyles.errorText}>{props.touched.counter && props.errors.counter}</Text>
+
+
+             
+
                       <View style={globalStyles.buttonContainer} >
                           <Button  color='white' title="Submit" onPress={props.handleSubmit} /> 
                       </View>
@@ -101,10 +120,10 @@ export default function UsersIndividualGoal(props) {
           <Formik
               initialValues={{note: '', date: new Date(), goal_id: 1 }}
               //// fix this validation schema
-              validationSchema={reviewSchema}
+              validationSchema={noteReviewSchema}
               onSubmit={(note, actions) => {
           
-                fetch("http://localhost:3000/notes", {
+                fetch("http://localhost:3000/notes/1", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -130,6 +149,10 @@ export default function UsersIndividualGoal(props) {
                           value={props.values.note}
                         />
 
+                        <Text style={globalStyles.errorText}>
+                          {props.touched.note && props.errors.note}
+                        </Text>
+
                     <View style={globalStyles.buttonContainer} >
                         <Button  color='white' title="Submit" onPress={props.handleSubmit} /> 
                     </View>
@@ -145,12 +168,14 @@ export default function UsersIndividualGoal(props) {
              <Text style={globalStyles.titleText}>Comments</Text>
             </View>
 
+            <Text>{comments()}</Text>
+
             <Text style={globalStyles.formHeaderText}>  </Text>
           </View>
 
         </View>
 
-
+  </ImageBackground>
   
   );
 }

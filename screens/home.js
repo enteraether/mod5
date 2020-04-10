@@ -49,7 +49,8 @@ export default function Home(props) {
               } else {
               props.setUser(resp)
               }
-          })
+            }
+          )
           // actions.resetForm(); 
           // addNewGoal(values);
         }}
