@@ -13,7 +13,7 @@ export default function CommunitiesPublicGoals(props) {
 
   const [like, setLike] = useState(false)
   const [modalOpen, setModalOpen] = useState(false);
-  // const [userComments, setUserComments] = useState()
+  const [userGoals, setUserGoals] = useState()
 
   const likeImage = () => {
 		setLike(!like)
@@ -22,16 +22,21 @@ export default function CommunitiesPublicGoals(props) {
   const colorValue = like ? '#fb7777' : '#fff'
 
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/goals/${props.route.params.item.id}`)
-  //   .then(resp => resp.json())
-  //   .then(goal => {
-  //     // console.log(goal.comments)
-  //       setUserComments(goal.comments)
-  //         }
-  //       )
-  //   }, []
-  // )
+  useEffect(() => {
+    fetch("http://localhost:3000/goals/")
+    .then(resp => resp.json())
+    .then(goals => {
+      // console.log(goals)
+      goals.map(goal=>{
+        console.log(goal.private)
+        if (!goal.private) {
+          setUserGoals(goal, ...setUserGoals)
+          }
+        })
+      }
+    )
+    }, []
+  )
 
   // const comments = () => {
   //   return userComments.map(comment=>{
@@ -39,7 +44,7 @@ export default function CommunitiesPublicGoals(props) {
   //   })
   // } 
 
- console.log(props.route.params.userGoals)
+//  console.log(props.route.params.userGoals)
     // const { navigation } = props
 
     // const comments = () => {
@@ -59,7 +64,8 @@ export default function CommunitiesPublicGoals(props) {
 
       <View style={globalStyles.goalContainer}>
        <FlatList
-          data={props.route.params.userGoals}
+          // data={props.route.params.userGoals}
+          data={userGoals}
           renderItem={({ item })=> (
             // console.log(item)
             // if (!item.private) {

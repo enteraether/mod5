@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity, Button,TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity, Button,TouchableWithoutFeedback, Keyboard, FlatList } from 'react-native';
 import { globalStyles } from '../styles/global.js';
 import { CheckBox } from 'react-native-elements'
 import * as yup from 'yup';
@@ -11,35 +11,28 @@ export default function UsersIndividualGoal(props) {
     
   const [status, setStatus] = useState(false);
 
-  const [userComments, setUserComments] = useState()
+  // const [userComments, setUserComments] = useState()
 
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/goals/${props.route.params.item.id}`)
-    .then(resp => resp.json())
-    .then(goal => {
-      console.log(goal.comments)
-        setUserComments(goal.comments)
-          }
-        )
-    }, []
-  )
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/goals/${props.route.params.item.id}`)
+  //   .then(resp => resp.json())
+  //   .then(goal => {
+  //     console.log(goal.comments)
+  //       setUserComments(goal.comments)
+  //         }
+  //       )
+  //   }, []
+  // )
 // console.log(userComments)
-  // console.log(props.route.params.item.id)
+  // console.log(props.route.params.item.comments)
 
-  // const comments = () => {
-  //   return userComments.map(comment=>{
-  //     return <Text>{comment['comment']}</Text>
-  //   })
-  // } 
 
-    let first = props.route.params.item.start_date
-    console.log(first)
-
-  //   function datediff(first, second) {
-
-  //     return Math.round((second-first)/(1000*60*60*24));
-  // }
+  const comments = () => {
+    return props.route.params.item.comments.map(comment => {
+          return <Text>{comment['comment']}</Text>
+        })
+  } 
 
       ////// fix this review schema
       // add note inside
@@ -75,16 +68,16 @@ export default function UsersIndividualGoal(props) {
               validationSchema={ goalCountReviewSchema }
               onSubmit={(values, actions) => {
                 if (values['counter'])
-                  {fetch("http://localhost:3000/goals/3", {
+                  {fetch(`http://localhost:3000/goals/${props.route.params.item.id}`, {
                     method: "PATCH",
                     headers: {
                       "Content-Type": "application/json",
                       "Accept": "application/json"
                     }, body: JSON.stringify({values})
-                  }).then(resp => resp.json())}
-          else {
-                // make alert here 
-          }
+                  }).then(resp => resp.json())
+                .then(alert('Your Rock! Awesome work today!'))
+                .then(actions.resetForm(!counter)) }
+
                 // .then(console.log)
 
                 // add validation so they can't submit this form more than once per day
@@ -129,12 +122,12 @@ export default function UsersIndividualGoal(props) {
           </Formik>
 
           <Formik
-              initialValues={{note: '', date: new Date(), goal_id: 1 }}
+              initialValues={{note: '', date: new Date(), goal_id: props.route.params.item.id }}
               //// fix this validation schema
               validationSchema={noteReviewSchema}
               onSubmit={(note, actions) => {
           
-                fetch("http://localhost:3000/notes/1", {
+                fetch(`http://localhost:3000/notes`, {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -179,7 +172,39 @@ export default function UsersIndividualGoal(props) {
              <Text style={globalStyles.titleText}>Comments</Text>
             </View>
 
-            {/* <Text>{comments()}</Text> */}
+            {/* style={globalStyles.item} */}
+{/* 
+            <FlatList
+              data={props.route.params.item.comments}
+              renderItem={({ comment })=> (
+                 console.log(comment)
+                    // <View style={globalStyles.box} >
+                    //   <ImageBackground
+                    //   source={require('../assets/images/white-texture.jpg')}
+                    //   style={{    
+                    //     height: 200,
+                    //     width: 300,}}>
+                    //   <View style={globalStyles.center} >
+                    //     <View style={globalStyles.cardMargin} >
+                    //         <Text style={globalStyles.formHeaderTitle} >
+                    //         {comment}
+                    //         </Text>
+                    //     </View>
+                      
+                    //   </View>
+                    //   </ImageBackground>
+                    // </View>
+                )}
+                >
+            </FlatList>  */}
+
+
+
+
+
+
+
+           <Text>{comments()}</Text>
 
             <Text style={globalStyles.formHeaderText}>  </Text>
           </View>
