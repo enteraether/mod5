@@ -15,9 +15,19 @@ export default function userHome({navigation}) {
   //   });
   // };
 
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/goals").then(resp => resp.json()).then(data => setUserGoals(data))
+  // }, []
+  // )
+
   useEffect(() => {
-    fetch("http://localhost:3000/goals").then(resp => resp.json()).then(data => setUserGoals(data))
-  }, []
+    fetch("http://localhost:3000/users/1")
+    .then(resp => resp.json())
+    .then(data => {
+        setUserGoals(data.goals)
+          }
+        )
+    }, []
   )
 
 
@@ -37,14 +47,24 @@ export default function userHome({navigation}) {
             <TouchableOpacity onPress={()=> navigation.navigate('UsersIndividualGoal', {item})} style={globalStyles.item}>
               <View style={globalStyles.box} >
                 <ImageBackground
-                source={require('../assets/images/watercolor.jpg')}
+                source={require('../assets/images/white-texture.jpg')}
                 style={{    
                   height: 200,
                   width: 300,}}>
                 <View style={globalStyles.center} >
-                  <Text style={globalStyles.goalTitleText} >
+                  <View style={globalStyles.cardMargin} >
+                  <Text style={globalStyles.formHeaderTitle} >
                   {item.name}
                 </Text>
+                </View>
+                <View style={globalStyles.center} >
+                  <Text style={globalStyles.spaceBtElements} >
+                    What: {item.what}
+                  </Text>
+                  <Text  style={globalStyles.loginPadding}>
+                    Why: {item.why}
+                  </Text>
+                  </View>
                 </View>
                 </ImageBackground>
               </View>
@@ -65,7 +85,7 @@ export default function userHome({navigation}) {
       </TouchableWithoutFeedback>
 
       <View style={globalStyles.buttonContainer} >
-         <TouchableOpacity onPress={()=> navigation.navigate('CommunitiesPublicGoals')} >
+         <TouchableOpacity onPress={()=> navigation.navigate(('CommunitiesPublicGoals'), {userGoals}) } >
               <Text style={globalStyles.buttonText} >
                 Browse Other User's Goal-Habits
               </Text>

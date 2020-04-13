@@ -6,11 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import * as yup from 'yup';
 import {   
   Formik,
-  Field,
-  Form,
-  useField,
-  FieldAttributes,
-  FieldArray} 
+} 
 from 'formik';
 import { Ionicons } from '@expo/vector-icons'
 

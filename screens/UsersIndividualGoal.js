@@ -9,18 +9,29 @@ from 'formik';
 
 export default function UsersIndividualGoal(props) {
     
-const comments = () => {
-  return props.route.params.item.comments.map(comment=>{
-    return <Text>{comment['comment']}</Text>
+  const [status, setStatus] = useState(false);
 
-  })
-} 
+  const [userComments, setUserComments] = useState()
 
-    // console.log(
-    //   comments()
-    // )
 
-    // const [note, setNote] = useState()
+  useEffect(() => {
+    fetch(`http://localhost:3000/goals/${props.route.params.item.id}`)
+    .then(resp => resp.json())
+    .then(goal => {
+      console.log(goal.comments)
+        setUserComments(goal.comments)
+          }
+        )
+    }, []
+  )
+// console.log(userComments)
+  // console.log(props.route.params.item.id)
+
+  // const comments = () => {
+  //   return userComments.map(comment=>{
+  //     return <Text>{comment['comment']}</Text>
+  //   })
+  // } 
 
     let first = props.route.params.item.start_date
     console.log(first)
@@ -64,7 +75,7 @@ const comments = () => {
               validationSchema={ goalCountReviewSchema }
               onSubmit={(values, actions) => {
                 if (values['counter'])
-                  {fetch("http://localhost:3000/goals/1", {
+                  {fetch("http://localhost:3000/goals/3", {
                     method: "PATCH",
                     headers: {
                       "Content-Type": "application/json",
@@ -168,7 +179,7 @@ const comments = () => {
              <Text style={globalStyles.titleText}>Comments</Text>
             </View>
 
-            <Text>{comments()}</Text>
+            {/* <Text>{comments()}</Text> */}
 
             <Text style={globalStyles.formHeaderText}>  </Text>
           </View>

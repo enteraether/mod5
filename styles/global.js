@@ -109,6 +109,14 @@ export const globalStyles = StyleSheet.create({
   loginPadding: {
     padding: 10,
   },
+  cardMargin: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginBottom: 10,
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10
+  },
   errorText: {
     color: 'crimson',
     fontWeight: 'bold',
