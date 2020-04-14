@@ -30,8 +30,10 @@ export default function UsersIndividualGoal(props) {
 
   const comments = () => {
     return props.route.params.item.comments.map(comment => {
-          return <Text>{comment['comment']}</Text>
-        })
+          return (
+            <Text>{comment['comment']}</Text>
+            )
+        }) 
   } 
 
       ////// fix this review schema
@@ -76,7 +78,9 @@ export default function UsersIndividualGoal(props) {
                     }, body: JSON.stringify({values})
                   }).then(resp => resp.json())
                 .then(alert('Your Rock! Awesome work today!'))
-                .then(actions.resetForm(!counter)) }
+                .then(actions.resetForm(!counter)) 
+                .then()
+              }
 
                 // .then(console.log)
 
@@ -173,38 +177,23 @@ export default function UsersIndividualGoal(props) {
             </View>
 
             {/* style={globalStyles.item} */}
-{/* 
+
             <FlatList
               data={props.route.params.item.comments}
-              renderItem={({ comment })=> (
-                 console.log(comment)
-                    // <View style={globalStyles.box} >
-                    //   <ImageBackground
-                    //   source={require('../assets/images/white-texture.jpg')}
-                    //   style={{    
-                    //     height: 200,
-                    //     width: 300,}}>
-                    //   <View style={globalStyles.center} >
-                    //     <View style={globalStyles.cardMargin} >
-                    //         <Text style={globalStyles.formHeaderTitle} >
-                    //         {comment}
-                    //         </Text>
-                    //     </View>
-                      
-                    //   </View>
-                    //   </ImageBackground>
-                    // </View>
+              renderItem={({ item })=> (
+                //  console.log(item)
+                      <View style={globalStyles.center} >
+                        <View style={globalStyles.cardMargin} >
+                            <Text style={globalStyles.formHeaderTitle} >
+                            {item.comment}
+                            </Text>
+                        </View>          
+                      </View>
                 )}
                 >
-            </FlatList>  */}
+            </FlatList> 
 
-
-
-
-
-
-
-           <Text>{comments()}</Text>
+           {/* <Text>{comments()}</Text> */}
 
             <Text style={globalStyles.formHeaderText}>  </Text>
           </View>

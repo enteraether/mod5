@@ -44,6 +44,7 @@ export default function userHome({navigation}) {
        <FlatList
           data={userGoals}
           renderItem={({ item })=> (
+            
             <TouchableOpacity onPress={()=> navigation.navigate('UsersIndividualGoal', {item})} style={globalStyles.item}>
               <View style={globalStyles.box} >
                 <ImageBackground
