@@ -13,20 +13,38 @@ export const globalStyles = StyleSheet.create({
     color: '#eee',
   },
   homePageHeader: {
-    color: '#333',
+    color: '#ffa200',
     fontSize: 28,
-    borderColor: '#333',
-    borderWidth: 2,
+    fontWeight: 'bold',
+    borderColor: '#ffa200',
+    borderWidth: 4,
     padding: 20,
     paddingLeft: 40,
     paddingRight: 40,
     backgroundColor: 'rgba(255,255,255, .1)'
   },
-  topOfPagePadding: {
+  homePagePadding: {
     paddingTop: 80,
   },
+  topOfPagePadding: {
+    paddingTop: 20,
+  },
+  userIndividGoalHeader: {
+    color: '#333',
+    fontSize: 22,
+    fontWeight: 'bold',
+    borderColor: '#ffa200',
+    borderWidth: 3,
+    padding: 10,
+    paddingLeft: 110,
+    paddingRight: 110,
+    backgroundColor: 'rgba(255,255,255, 0.1)'
+  },
   spaceBtElements: {
-    paddingTop: 30,
+    paddingTop: 15,
+  },
+  spaceBtElementsUserIndividGoal: {
+    paddingTop: 18,
   },
 
   formHeaderText: {
@@ -34,6 +52,8 @@ export const globalStyles = StyleSheet.create({
     color: '#333',
     padding: 5,
     paddingTop: 20,
+    alignSelf:'center',
+    textAlign:'center',
   },
   center: {
     alignItems: "center",
@@ -52,22 +72,48 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  flex: {
+    flex: 1,
+    // paddingBottom: 20,
+  },
   containerUserHome: {
     flex: 1,
     padding: 20,
     paddingBottom: 230,
   },
   buttonContainer: {
-    backgroundColor: '#222',
+    backgroundColor: '#ffa200',
     borderRadius: 5,
     padding: 10,
     margin: 15,
     alignItems: "center",
     justifyContent: "center",
+    
+  },
+  buttonContainerHome: {
+    backgroundColor: '#rgba(255, 162, 0, 0.7)',
+    borderRadius: 5,
+    padding: 10,
+    margin: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    
+  },
+  buttonContainerSmall: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#ffa200',
+    borderRadius: 5,
+    // padding: 10,
+    width: 100,
+    height: 50,
+    margin: 15,
+    
   },
   buttonText: {
     fontSize: 20,
     color: '#fff',
+    // opacity: 0.8,
   },
   box: {
     height: 200,
@@ -85,6 +131,12 @@ export const globalStyles = StyleSheet.create({
     elevation: 5,
   },
   goalContainer: {
+    // flex: 1,
+    // backgroundColor: "#e2e2e2",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  checkboxPosition: {
     // flex: 1,
     // backgroundColor: "#e2e2e2",
     alignItems: "center",
@@ -142,6 +194,33 @@ export const globalStyles = StyleSheet.create({
     opacity: 0.8,
     borderColor: '#000',
     borderWidth: 3
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  modalContentTitle: {
+    fontSize: 20,
+    marginBottom: 12,
+  },
+  userHomeTitleBox: {
+    height: 75,
+    width: 400,
+    backgroundColor: "#ffa200",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
  
 });

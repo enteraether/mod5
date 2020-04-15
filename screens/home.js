@@ -60,7 +60,7 @@ export default function Home(props) {
           <View  >
 
             <View style={globalStyles.center}>
-              <View style={globalStyles.topOfPagePadding}>
+              <View style={globalStyles.homePagePadding}>
               <Text style={globalStyles.homePageHeader}>The Goal Tracking App </Text>
               </View>
             </View>
@@ -94,6 +94,7 @@ export default function Home(props) {
               <View style={globalStyles.loginPadding} >
               <TextInput
                 name='password'
+                secureTextEntry
                 value={props.values.password}
                 onChangeText={props.handleChange('password')}
                 placeholder='Enter password'
@@ -106,13 +107,13 @@ export default function Home(props) {
               <View >
                 
                   <TouchableOpacity
-                    style={globalStyles.buttonContainer}
+                    style={globalStyles.buttonContainerHome}
                     onPress={() => navigation.navigate('userHome')}>
                   <Text style={globalStyles.buttonText}>Login</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    style={globalStyles.buttonContainer}
+                    style={globalStyles.buttonContainerHome}
                     onPress={() => navigation.navigate('UsersIndividualGoal')}>
                   <Text style={globalStyles.buttonText}>SignUp</Text>
                   </TouchableOpacity>

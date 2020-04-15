@@ -6,22 +6,11 @@ import PrivateGoalCard from '../container/PrivateGoalCard'
 
 export default function userHome({navigation}) {
 
+  // console.log(props.route.params)
   const [userGoals, setUserGoals] = useState()
 
-  // const addNewGoal = (goal) => {
-  //   // goals.key = Math.random().toString();
-  //   setGoals((currentGoals) => {
-  //     return [goal, ...currentGoals];
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   fetch("http://localhost:3000/goals").then(resp => resp.json()).then(data => setUserGoals(data))
-  // }, []
-  // )
-
   useEffect(() => {
-    fetch("http://localhost:3000/users/1")
+    fetch("http://localhost:3000/users/16")
     .then(resp => resp.json())
     .then(data => {
         setUserGoals(data.goals)
@@ -30,11 +19,16 @@ export default function userHome({navigation}) {
     }, []
   )
 
+  const updateGoalState = (resp) => {
+    setUserGoals(...userGoals, resp)
+  }
 
   return (
     <View style={globalStyles.containerUserHome}>
       <View style={globalStyles.center} >
-       <Text style={globalStyles.titleText} >Welcome Back, Theresa</Text>
+        <View style={globalStyles.userHomeTitleBox} >
+       <Text style={globalStyles.titleText} >Welcome Back, Theresa!</Text>
+       </View>
       </View>
       <View style={globalStyles.center} >
        <Text></Text>
@@ -45,7 +39,7 @@ export default function userHome({navigation}) {
           data={userGoals}
           renderItem={({ item })=> (
             
-            <TouchableOpacity onPress={()=> navigation.navigate('UsersIndividualGoal', {item})} style={globalStyles.item}>
+            <TouchableOpacity onPress={()=> navigation.navigate('UsersIndividualGoal', {item, userGoals, setUserGoals})} style={globalStyles.item}>
               <View style={globalStyles.box} >
                 <ImageBackground
                 source={require('../assets/images/white-texture.jpg')}
@@ -54,19 +48,23 @@ export default function userHome({navigation}) {
                   width: 300,}}>
                 <View style={globalStyles.center} >
                   <View style={globalStyles.cardMargin} >
-                  <Text style={globalStyles.formHeaderTitle} >
-                  {item.name}
-                </Text>
-                </View>
+                      <Text style={globalStyles.formHeaderTitle} >
+                         {item.name}
+                      </Text>
+                  </View>
+                  </View>
                 <View style={globalStyles.center} >
-                  <Text style={globalStyles.spaceBtElements} >
-                    What: {item.what}
+                  <Text  >
+                    {item.counter} Days
+                  </Text>
+                </View>
+                  <Text style={globalStyles.loginPadding} >
+                    Your What: {item.what}
                   </Text>
                   <Text  style={globalStyles.loginPadding}>
-                    Why: {item.why}
+                    Your Why: {item.why}
                   </Text>
-                  </View>
-                </View>
+                  
                 </ImageBackground>
               </View>
             </TouchableOpacity>
@@ -75,20 +73,20 @@ export default function userHome({navigation}) {
        </FlatList>    
       </View>
 
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+    
       <View style={globalStyles.buttonContainer} >
-         <TouchableOpacity onPress={()=> navigation.navigate('AddNewGoal') } >
+         <TouchableOpacity onPress={()=> navigation.navigate('AddNewGoal')} >
               <Text style={globalStyles.buttonText} >
                 Add New Goal
               </Text>
           </TouchableOpacity>
       </View>
-      </TouchableWithoutFeedback>
+   
 
       <View style={globalStyles.buttonContainer} >
          <TouchableOpacity onPress={()=> navigation.navigate(('CommunitiesPublicGoals'), {userGoals}) } >
               <Text style={globalStyles.buttonText} >
-                Browse Other User's Goal-Habits
+                Browse Other User's Goals
               </Text>
  
           </TouchableOpacity>

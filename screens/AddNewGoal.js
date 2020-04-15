@@ -13,20 +13,21 @@ import { Ionicons } from '@expo/vector-icons'
 
 export default function AddNewGoal(props) {
 
+  // console.log(props.route.params.userGoals)
     // const [goals, setGoals] = useState()
 
     ////// fix this review schema
-    const reviewSchema = yup.object({
-      name: yup.string()
-        .required()
-        .min(2),
-      username: yup.string()
-        .required()
-        .min(3),
-      password: yup.string()
-        .required()
-        .min(3),
-    });
+    // const reviewSchema = yup.object({
+    //   name: yup.string()
+    //     .required()
+    //     .min(2),
+    //   username: yup.string()
+    //     .required()
+    //     .min(3),
+    //   password: yup.string()
+    //     .required()
+    //     .min(3),
+    // });
 
 
   return (
@@ -37,11 +38,11 @@ export default function AddNewGoal(props) {
     <View style={globalStyles.container}>
 
     <Formik
-        initialValues={{private: false , what: '', why: '', name: '', start_date: new Date(), user_id: 1}}
+        initialValues={{private: false , what: '', why: '', name: '', start_date: new Date(), user_id: 1, counter: 0}}
         //// fix this validation schema
-        validationSchema={reviewSchema}
+        // validationSchema={reviewSchema}
         onSubmit={(goal, actions) => {
-          
+          console.log(goal)
           fetch("http://localhost:3000/goals", {
             method: "POST",
             headers: {
@@ -50,8 +51,24 @@ export default function AddNewGoal(props) {
             }, body: JSON.stringify({goal})
           }).then(resp => resp.json())
           .then(console.log)
-          actions.resetForm(); 
-          // goToLogin = () => navigation.navigate('userHome')
+                          .then(()=> {
+                  let newGoals = props.route.params.userGoals.map(goal => {
+                    if (goal.id === props.route.params.item.id) {
+                      return {
+                        ...goal, counter: goal.counter+1
+                      }
+                      
+                      // props.route.params.item
+                      // console.log('############ ', goal)
+                    }
+                    else {return goal}
+                  })
+                  props.route.params.setUserGoals(newGoals)
+                  props.navigation.navigate('userHome')
+                })
+          // .then(updateGoalState(resp))
+          // goToUserHome = () => navigation.navigate('userHome', {()=>updateGoalState(resp)})
+          // .then(props.navigation.navigate('userHome', {()=>updateGoalState(resp)}))
           // addNewGoal(values);
         }}
     >
@@ -61,9 +78,11 @@ export default function AddNewGoal(props) {
             <View style={globalStyles.center}>
               <Text style={globalStyles.formHeaderTitle} >Woohoooo let's set a new goal!!!</Text>
             </View>
-            <View >
-               <Text style={globalStyles.formHeaderText} >Make this goal Public? 
-               
+
+            <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+
+               <Text style={globalStyles.formHeaderText} >
+                  Make this goal Public? 
                </Text>
                {/* <Ionicons name="md-checkbox" size={32} color="green" /> */}
 
@@ -77,6 +96,7 @@ export default function AddNewGoal(props) {
                   checked={props.values.private}
                   onPress={() => props.setFieldValue('private', !props.values.private)}
                 />
+
             </View>
               <Text style={globalStyles.formHeaderText}>Goal Name</Text>
               <TextInput

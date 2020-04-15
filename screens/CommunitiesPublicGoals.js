@@ -11,12 +11,16 @@ from 'formik';
 
 export default function CommunitiesPublicGoals(props) {
 
+  console.log(props.route.params.userGoals)
+
   const [like, setLike] = useState(false)
   const [modalOpen, setModalOpen] = useState(false);
   const [userGoals, setUserGoals] = useState()
+  const [publicGoals, setPublicGoals] = useState()
 
-  const likeImage = () => {
-		setLike(!like)
+  const likeImage = (item) => {
+    // console.log(item.like)
+		setLike(!item.like)
 	}
 
   const colorValue = like ? '#fb7777' : '#fff'
@@ -27,16 +31,28 @@ export default function CommunitiesPublicGoals(props) {
     .then(resp => resp.json())
     .then(goals => {
       // console.log(goals)
-      goals.map(goal=>{
-        console.log(goal.private)
-        if (!goal.private) {
-          setUserGoals(goal, ...setUserGoals)
-          }
-        })
+      // goals.map(goal=>{
+      //   console.log(goal.private)
+      //   if (!goal.private) {
+      //     setUserGoals(goal, ...setUserGoals)
+      //     }
+      //   })
+      setUserGoals(goals)
+      setPublicGoals(publicGoalsRender(goals))
       }
     )
     }, []
   )
+
+  const publicGoalsRender = (goals) => {
+    let publicGoalsArray = []
+    goals.map(goal => {
+      if (!goal.private){
+        publicGoalsArray.push(goal)
+      }
+    })
+    return publicGoalsArray
+  }
 
   // const comments = () => {
   //   return userComments.map(comment=>{
@@ -65,11 +81,11 @@ export default function CommunitiesPublicGoals(props) {
       <View style={globalStyles.goalContainer}>
        <FlatList
           // data={props.route.params.userGoals}
-          data={userGoals}
-          renderItem={({ item })=> (
+          data={publicGoals}
+          renderItem={({ item }) => (
             // console.log(item)
             // if (!item.private) {
-              <View style={globalStyles.item} >
+              <View style={globalStyles.item} id={item.id} >
               <View style={globalStyles.box} >
                 <ImageBackground
                     source={require('../assets/images/white-texture.jpg')}
@@ -87,7 +103,8 @@ export default function CommunitiesPublicGoals(props) {
                     </Text>
 
                         <TouchableOpacity
-                          onPress={likeImage}
+                          onPress={() => likeImage(item)}
+                          
                         >
                           <Ionicons name="md-heart" size={35} color={colorValue} />
                         </TouchableOpacity>
@@ -100,10 +117,15 @@ export default function CommunitiesPublicGoals(props) {
                       } */}
                         <View >
                           <Button title="Send Comment" onPress={() => setModalOpen(true)} />
+                          {/* <View style={globalStyles.formHeaderTitle}>
+                            
+                          </View> */}
                           <Modal 
                               visible={modalOpen}
                               backdropColor="#694141"
-                              backdropOpacity={.9}
+                              backdropOpacity={.8}
+                              animationType={"slide"}
+                              // style={globalStyles.modalContent}>
                               >     
                             <View >
                           
@@ -168,6 +190,7 @@ export default function CommunitiesPublicGoals(props) {
           // }
           )}
        >
+         keyExtractor={item => item.id}
        </FlatList>    
        </View>
             
