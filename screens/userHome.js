@@ -75,7 +75,7 @@ export default function userHome({navigation}) {
 
     
       <View style={globalStyles.buttonContainer} >
-         <TouchableOpacity onPress={()=> navigation.navigate('AddNewGoal')} >
+         <TouchableOpacity onPress={()=> navigation.navigate('AddNewGoal', {userGoals, setUserGoals})} >
               <Text style={globalStyles.buttonText} >
                 Add New Goal
               </Text>

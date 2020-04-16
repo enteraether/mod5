@@ -13,7 +13,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 export default function AddNewGoal(props) {
 
-  // console.log(props.route.params.userGoals)
+  console.log(props.route.params.userGoals)
     // const [goals, setGoals] = useState()
 
     ////// fix this review schema
@@ -42,7 +42,7 @@ export default function AddNewGoal(props) {
         //// fix this validation schema
         // validationSchema={reviewSchema}
         onSubmit={(goal, actions) => {
-          console.log(goal)
+          // console.log(goal)
           fetch("http://localhost:3000/goals", {
             method: "POST",
             headers: {
@@ -50,27 +50,16 @@ export default function AddNewGoal(props) {
               "Accept": "application/json"
             }, body: JSON.stringify({goal})
           }).then(resp => resp.json())
-          .then(console.log)
-                          .then(()=> {
-                  let newGoals = props.route.params.userGoals.map(goal => {
-                    if (goal.id === props.route.params.item.id) {
-                      return {
-                        ...goal, counter: goal.counter+1
-                      }
-                      
-                      // props.route.params.item
-                      // console.log('############ ', goal)
-                    }
-                    else {return goal}
+          .then(()=> {
+            props.route.params.setUserGoals([...props.route.params.userGoals, goal])
                   })
-                  props.route.params.setUserGoals(newGoals)
-                  props.navigation.navigate('userHome')
-                })
+          .then(props.navigation.navigate('userHome'))
+                }
           // .then(updateGoalState(resp))
           // goToUserHome = () => navigation.navigate('userHome', {()=>updateGoalState(resp)})
           // .then(props.navigation.navigate('userHome', {()=>updateGoalState(resp)}))
           // addNewGoal(values);
-        }}
+        }
     >
         {props => (
   
